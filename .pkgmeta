@@ -1,0 +1,11 @@
+# Copied to the public repo as `.pkgmeta`, where CurseForge's packager reads it.
+#
+# The packager discovers the .toc at the repository *root*, which is why the public repo is flat
+# rather than carrying a Thottbot/ folder. `package-as` puts the folder back in the zip, so what
+# a player extracts into Interface/AddOns is a single Thottbot/ directory.
+package-as: Thottbot
+
+ignore:
+  # Build configuration, not part of the addon.
+  - .pkgmeta
+  - .github
