@@ -1,0 +1,26 @@
+Thottbot Forever
+Copyright (c) 2026 the Thottbot Forever team
+
+The source code in this repository is licensed under the MIT License; see LICENSE.
+
+TRADEMARKS AND BRAND ASSETS
+
+The MIT License covers the code. It does not grant rights in the project's name or
+its brand art, which are reserved:
+
+  - the names "Thottbot", "Thottbot Forever" and the domain thottbot4ever.com
+  - the wordmark and logo, including apps/web/src/components/Logo.tsx,
+    apps/web/public/favicon.svg, apps/web/public/og.png,
+    addon/curseforge/logo.svg and addon/Thottbot/logo.tga
+
+You may fork, modify and redistribute the code. Please do so under your own name and
+art, and point it at your own service: a fork carrying this project's branding while
+submitting data elsewhere would mislead the people running it.
+
+THIRD-PARTY CONTENT
+
+World of Warcraft, Warcraft and Blizzard Entertainment are trademarks or registered
+trademarks of Blizzard Entertainment, Inc. in the U.S. and/or other countries. Game
+data and images are the property of Blizzard Entertainment and are used under its fan
+site guidelines. This project is not affiliated with or endorsed by Blizzard
+Entertainment, nor with the operators of the WoW: Forever client.
