@@ -25,6 +25,8 @@ earlier beta, check the AddOns list on the character screen shows Thottbot enabl
 - Vendors: every item with price, currency and limited stock. Trainers: every spell with
   cost and required level.
 - Items you see: name, quality, item level, bind, class, sell price, tooltip lines.
+- Screenshots you take with the addon's camera button: the screenshot's file name, what it
+  shows (the NPC or object id, or the zone's map id), your map position and the time.
 
 ## What it never records
 
@@ -36,8 +38,13 @@ build.
 
 - Minimap button: hover for status, left click to pause or resume, right click for the
   command list, drag to move.
+- Camera button (beside the minimap, drag to move), `/thottbot shot`, or a key you bind under
+  Key Bindings → Thottbot: takes a screenshot of your target NPC or object, else what is
+  under the mouse, else the zone you are in. The interface is hidden for the shot, except in
+  combat, when the game does not allow it. A TGA screenshot format is switched to JPG for the
+  shot, since the site takes JPG and PNG only.
 - `/thottbot` or `/tb`: `status`, `pause`, `resume`, `clear` (start a fresh file),
-  `probe` (list which client APIs are available), `cursor` (what the client reports for the
+  `shot` (the camera button), `probe` (list which client APIs are available), `cursor` (what the client reports for the
   chest, node or herb under your mouse; use it if objects are missing from your uploads),
   `version`.
 
@@ -59,6 +66,13 @@ uploaded for you. Nothing uploads while the tab is closed.
 `gameobjectcache.wdb` (quests, creatures and objects) and in `Cache/ADB/enUS/DBCache.bin`
 (item names and stats). Choose them together with `Thottbot.lua` on the upload page, or let
 the auto-upload page watch them; only the enUS client's files are read.
+
+**Screenshots:** the auto-upload page also uploads the camera button's screenshots, once the
+game has written `Thottbot.lua` (`/reload` or logout), to the page of the NPC, object or zone
+they show, where they appear at once with your name. Pick the game folder or `_classic_beta_`
+so the page can reach `_classic_beta_/Screenshots`. It reads only the screenshots the button
+recorded; other screenshots in the folder are never opened or sent. A screenshot of something
+with no page on the site (inside an instance, say) is not uploaded, and the page says so.
 
 Either way, uploading the same file later (after more play) replaces your earlier upload;
 nothing is counted twice. `/thottbot clear` starts a new file when you want a clean slate.

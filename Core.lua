@@ -14,6 +14,8 @@ T.MAX_SIGHTINGS = 200
 T.THROTTLE = 30
 -- A game object's spawn GUID can be reused after it respawns; its loot counts again after this.
 T.OBJECT_LOOT_EXPIRY = 60
+-- Screenshot records kept for the auto-upload page; the oldest is dropped beyond this.
+T.MAX_SHOTS = 50
 T.TABLES = { 'npcs', 'objects', 'loot', 'vendors', 'trainers', 'quests', 'items' }
 T.PROBE = {
   'C_Map.GetBestMapForUnit', 'C_Map.GetPlayerMapPosition', 'C_TooltipInfo.GetWorldCursor',
@@ -84,6 +86,7 @@ function T.newDB()
     paused = false,
   }
   for _, k in ipairs(T.TABLES) do db[k] = {} end
+  db.shots = {}
   return db
 end
 
@@ -99,6 +102,7 @@ function T.initDB()
   for _, k in ipairs(T.TABLES) do
     if type(db[k]) ~= 'table' then db[k] = {} end
   end
+  if type(db.shots) ~= 'table' then db.shots = {} end
   if type(db.fileId) ~= 'string' or #db.fileId ~= 16 then db.fileId = hex16() end
   if type(db.created) ~= 'number' then db.created = T.now() end
   db.paused = db.paused == true
@@ -108,9 +112,14 @@ end
 function T.clear()
   local minimap = T.db and T.db.minimap
   local probe = T.db and T.db.probe
+  -- Screenshots not uploaded yet still need their records; the button keeps its place.
+  local shots = T.db and T.db.shots
+  local shotButton = T.db and T.db.shotButton
   ThottbotDB = T.newDB()
   ThottbotDB.minimap = minimap
   ThottbotDB.probe = probe
+  ThottbotDB.shots = shots or {}
+  ThottbotDB.shotButton = shotButton
   T.db = ThottbotDB
   T.session = { seen = {}, looted = {}, items = {}, lastObject = nil, lastBags = 0 }
 end
@@ -249,6 +258,8 @@ function T.command(msg)
   elseif msg == 'clear' then
     T.clear()
     log('data cleared; a fresh file starts now')
+  elseif msg == 'shot' then
+    T.shot()
   elseif msg == 'probe' then
     T.probe()
   elseif msg == 'cursor' then
@@ -265,7 +276,7 @@ function T.command(msg)
   elseif msg == '' or msg == 'status' then
     for _, line in ipairs(T.statusLines()) do log(line) end
   else
-    log('commands: status, pause, resume, clear, probe, cursor, version')
+    log('commands: status, pause, resume, clear, shot, probe, cursor, version')
   end
 end
 

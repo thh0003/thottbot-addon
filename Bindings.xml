@@ -1,0 +1,5 @@
+<Bindings>
+  <Binding name="THOTTBOT_SHOT" header="THOTTBOT" category="ADDONS">
+    Thottbot.shot()
+  </Binding>
+</Bindings>
